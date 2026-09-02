@@ -1,0 +1,339 @@
+% Exact LaTeX recreation of the supplied Phase-1.pdf
+% Compile with pdfLaTeX. Place member pictures in the same folder if required.
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,left=2.0cm,right=2.0cm,top=1.55cm,bottom=1.55cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{setspace}
+
+% -------------------------------------------------
+% COLOURS
+% -------------------------------------------------
+\definecolor{TitleBlue}{RGB}{61,103,154}
+
+% -------------------------------------------------
+% GENERAL SETTINGS
+% -------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\arraystretch}{1.0}
+
+% The supplied document uses a clean sans-serif heading style
+% and italic serif-style explanatory text.
+\newcommand{\blueheading}[1]{%
+    {\sffamily\color{TitleBlue}\fontsize{15}{18}\selectfont #1}%
+}
+
+\newcommand{\bluebigheading}[1]{%
+    {\sffamily\bfseries\color{TitleBlue}\fontsize{16}{19}\selectfont #1}%
+}
+
+\newcommand{\instruction}[1]{%
+    {\itshape\fontsize{10.5}{12.5}\selectfont #1}%
+}
+
+\newcommand{\answerbox}[2][3.0cm]{%
+    \vspace{2pt}
+    \noindent
+    \fbox{%
+        \begin{minipage}[t][#1][t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+            \vspace{1mm}
+            \itshape #2
+        \end{minipage}
+    }
+}
+
+% -------------------------------------------------
+% HEADER / FOOTER
+% -------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancyhead[L]{%
+    \sffamily\bfseries\itshape\fontsize{10.5}{12}\selectfont
+    COURSE NAME AND ID
+}
+\fancyhead[R]{%
+    \sffamily\bfseries\fontsize{10.5}{12}\selectfont
+    PROJECT PROPOSAL
+}
+\fancyfoot[R]{%
+    \itshape\fontsize{10}{12}\selectfont
+    Page \thepage
+}
+\setlength{\headheight}{14pt}
+\setlength{\headsep}{23pt}
+\setlength{\footskip}{24pt}
+
+% -------------------------------------------------
+% PAGE 1
+% -------------------------------------------------
+\begin{document}
+
+\vspace*{4mm}
+
+\bluebigheading{PROJECT AND TEAM INFORMATION}
+
+\vspace{13mm}
+
+\blueheading{Project Title}
+
+\vspace{1mm}
+
+\answerbox[1.0cm]{MediSense AI -- A Hybrid, Self-Built k-NN Based Clinical Decision Support and Triage System}
+
+\vspace{13mm}
+
+\blueheading{Student / Team Information}
+
+\vspace{2mm}
+
+% Team information table
+% Compact 4-member layout so all members remain on Page 1.
+\noindent
+\begin{tabularx}{\textwidth}{|>{\RaggedRight\arraybackslash}p{0.69\textwidth}|>{\RaggedRight\arraybackslash}X|}
+\hline
+\begin{minipage}[t]{\linewidth}
+\vspace{1.5mm}
+\textit{Team Name:}\\[-1mm]
+\textit{Team \#}
+\vspace{1.5mm}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}
+\vspace{1.5mm}
+\textit{Codeblue}
+\vspace{1.5mm}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 1 (Team Lead)}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Verma, Krish -- 2510370349}\\
+\textit{19verma.2229@gmail.com}
+
+\vspace{2mm}
+\includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{krish.png}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.75cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 2}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Kumar Kanu, shivam -- 2510018717}\\
+\textit{shivamkanu.bdschool@
+gmail.com}
+
+\vspace{2mm}
+\includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{shivam.png}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 3}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Garg, Suhani -- 2510350042}\\
+\textit{gargsuhani05@gmail.com}
+
+\vspace{2mm}
+\includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{suhani.png}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 4}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Sumit -- 2510370550}\\
+\textit{ssailani876@gmail.com}
+
+\vspace{2mm}
+ \includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{sumit.png}
+\end{minipage}
+\\
+\hline
+\end{tabularx}
+
+\newpage
+
+% -------------------------------------------------
+% PAGE 2
+% -------------------------------------------------
+
+\bluebigheading{PROPOSAL DESCRIPTION (10 pts)}
+
+\vspace{12mm}
+
+\blueheading{Motivation (1 pt)}
+
+\vspace{1mm}
+
+\answerbox[10.0cm]{Across healthcare providers of every size, patient intake still runs on guesswork rather than data. In small and mid-sized clinics, there is usually no decision-support tool at all: routing decisions depend on whichever staff member happens to be on duty, a genuine emergency can end up waiting behind routine walk-ins simply because there is no automated priority mechanism, and every patient is effectively treated as a first-time case even though similar cases have almost certainly occurred before. Doctor availability and patient routing are handled ad hoc, by memory or a phone call, and medicine shortages tend to surface only at the point of prescription, when it is already too late to plan around them.
+
+Large hospitals face a related but very different version of the same problem. here the issue is scale rather than absence of process: patient volumes overwhelm manual triage judgment across departments, coordinating dozens of doctors and specialties by hand becomes error-prone, and emergency cases must be prioritised automatically and consistently rather than depending on a busy front desk noticing them in time. hospitals also sit on tens of thousands of historical records that are simply stored and never used, even though a dataset of that size is exactly what makes a technique like k-Nearest Neighbours statistically meaningful. naive linear search and unsorted queues, at that volume, become genuine performance bottlenecks rather than academic inefficiencies.
+
+Solving this matters because triage delays and uncoordinated routing directly affect patient outcomes, and because a clinic or hospital that cannot learn from its own historical data is discarding a resource it already has. this project treats that as a data structures problem as much as a healthcare one: the right hash tables, queues, and search structures turn stored records into a working decision-support system instead of a passive archive.}
+
+\vspace{12mm}
+
+\blueheading{State of the Art / Current solution (1 pt)}
+
+\vspace{1mm}
+
+\answerbox[6cm]{Most small and mid-sized clinics today rely entirely on staff experience and paper or basic digital registers; there is no predictive or decision-support layer, and triage priority is judged informally at the front desk. larger hospitals typically run Hospital Management Systems or Electronic Health Record platforms, but these are largely record-keeping and scheduling tools -- they store patient, doctor, and appointment data reliably, yet most do not actively use that stored history to help route a new patient or suggest a likely diagnosis. where predictive tools do exist, they are usually built on heavyweight external machine-learning libraries, which makes them opaque to the people using them and unsuited to a course that is specifically about implementing data structures and OOP concepts from first principles. As a result, the gap is not a lack of digital systems -- it is the absence of a lightweight, transparent, syllabus-native decision-support layer sitting on top of the data hospitals and clinics already collect. MediSense AI is designed to fill exactly that gap, using hand-built structures rather than an imported ml stack}
+
+\vspace{50mm}
+
+\blueheading{Project Goals and Milestones (2 pts)}
+
+\vspace{1mm}
+
+\answerbox[13.5cm]{Goals
+\begin{itemize}[itemsep=1pt,topsep=2pt,leftmargin=14pt]
+\item Build a working clinical decision-support and triage system in C that maps every Data Structures topic (hashing, sorting, queues, linked lists, sparse matrices, dynamic memory, file structures) onto a real, functioning module rather than an isolated exercise.
+\item Simulate the full OOP (C++) syllabus -- classes, encapsulation, inheritance, polymorphism, operator overloading, exception handling -- using equivalent C constructs, so one codebase genuinely satisfies both courses.
+\item Hand-build a lightweight k-Nearest Neighbours engine from scratch, so historical case data actively improves future predictions instead of sitting unused.
+\item Support three distinct user roles -- Doctor, Patient, and Receptionist -- each restricted to the tools their job actually needs.
+\end{itemize}
+
+Milestones
+\begin{itemize}[itemsep=1pt,topsep=2pt,leftmargin=14pt]
+\item M1 -- Core data layer: patient, doctor and case-record structs; dynamic arrays; file persistence for patients, doctors, and case history.
+\item M2 -- Symptom hashing: hash table for symptom-to-disease lookup, built over a sparse disease-symptom matrix; collision handling.
+\item M3 -- k-NN engine: KNN\_addCase() / KNN\_predict(), Euclidean distance computation, custom Quick Sort on distances, majority vote over the top-k neighbours.
+\item M4 -- Triage logic: priority queue for emergency cases, FIFO queue for routine bookings, linked-list visit history per patient.
+\item M5 -- OOP mapping \& roles: opaque-struct encapsulation, inheritance (Person $\rightarrow$ Doctor), function-pointer polymorphism for doctor recommendations, and the three-role login system.
+\item M6 -- Integration, testing \& demo: end-to-end walkthrough on sample patient data, report and presentation.
+\end{itemize}}
+
+\vspace{125mm}
+
+\blueheading{Project Approach (3 pts)}
+
+\vspace{1mm}
+
+\answerbox[10.5cm]{MediSense AI is implemented entirely in C, deliberately, so that every C++ OOP concept required by the syllabus has to be recreated by hand using structs and function pointers -- the same way STL containers or classes work under the hood. A patient's intake runs through two stages. stage 1 hashes the reported symptoms against a disease-symptom hash table built on top of a sparse disease $\times$ symptom matrix, producing a percentage symptom match per candidate disease. stage 2 feeds the patient's normalised vitals into our own k-NN engine: distances to every stored historical case are computed, sorted with a custom Quick Sort implementation, and the five nearest neighbours vote on a diagnosis. the two signals are combined into a single weighted match score that drives doctor recommendation by specialty.
+
+On the OOP side, we lean on constructs that mirror C++ directly: an opaque struct plus a small set of accessor functions KNN\_addCase(), KNN\_predict() stands in for encapsulation, since the rest of the program never touches the underlying array or sort logic; a base Person struct embedded as the first member of a Doctor struct gives us inheritance; a function pointer stored per doctor instance acts as a hand-built vtable for polymorphic recommendation behaviour; named functions such as Patient\_equals() stand in for operator overloading; and setjmp/longjmp or error-code enums handle exception-style vitals validation.
+
+Triage itself is handled with a priority queue for flagged emergencies and a plain FIFO queue for routine bookings, so urgent patients are never stuck behind non-urgent walk-ins. Each visit is appended to the patient's medical history as a new linked-list node, and every doctor-confirmed diagnosis is appended back into the k-NN dataset, so the system's predictions keep improving as more real cases are logged. Data is persisted to flat files, and the whole system is exposed through three separate command-line logins: Doctor, Patient, and Receptionist.}
+
+
+% -------------------------------------------------
+% PAGE 3
+% -------------------------------------------------
+\vspace{12mm}
+\blueheading{System Architecture (High Level Diagram)(2 pts)}
+
+\vspace{1mm}
+
+\begin{center}
+\begin{tikzpicture}[
+  yscale=1, xscale=1,
+  box/.style={draw, rounded corners, align=center, minimum height=1.0cm, font=\small, fill=blue!5},
+  role/.style={box, minimum width=2.6cm, fill=TitleBlue!12},
+  core/.style={box, minimum width=3.0cm, minimum height=1.3cm},
+  store/.style={box, minimum width=2.6cm, fill=gray!12},
+  arrow/.style={-Stealth, thick}
+]
+
+\node[role] (doctor) at (-4.2,0) {Doctor\\Login};
+\node[role] (receptionist) at (0,0) {Receptionist\\Login};
+\node[role] (patient) at (4.2,0) {Patient\\Login};
+
+\node[box, minimum width=9.6cm] (interface) at (0,-1.7) {Command-Line Interface Layer};
+
+\node[core] (hash) at (-3.4,-3.4) {Symptom Hashing\\(Hash Table +\\Sparse Matrix)};
+\node[core] (knn) at (0,-3.4) {custom k-NN\\engine\\(Quick Sort)};
+\node[core] (triage) at (3.4,-3.4) {Triage queues\\(priority + FIFO)};
+\node[store] (patientfile) at (-3.4,-5.1) {Patient /\\Doctor Records};
+\node[store] (casefile) at (0,-5.1) {k-NN Case\\history};
+\node[store] (visitfile) at (3.4,-5.1) {Visit History\\(Linked List)};
+\node[box, minimum width=9.6cm] (storage) at (0,-6.4) {File-Based Persistent Storage};
+
+\draw[arrow] (doctor) -- (interface);
+\draw[arrow] (receptionist) -- (interface);
+\draw[arrow] (patient) -- (interface);
+\draw[arrow] (interface) -- (hash);
+\draw[arrow] (interface) -- (knn);
+\draw[arrow] (interface) -- (triage);
+\draw[arrow] (hash) -- (patientfile);
+\draw[arrow] (knn) -- (casefile);
+\draw[arrow] (triage) -- (visitfile);
+\draw[arrow] (patientfile) -- (storage);
+\draw[arrow] (casefile) -- (storage);
+\draw[arrow] (visitfile) -- (storage);
+\end{tikzpicture}
+\end{center}
+
+\vspace{2mm}
+\answerbox[1.75cm]{Three role-based logins (Doctor, Receptionist, Patient) sit on top of a shared interface layer. Requests flow into three core engines -- symptom hashing, the custom k-NN predictor, and the triage queues -- each backed by its own on-disk store, all persisted through a common file-based storage layer}
+
+\vspace{12mm}
+\newpage
+\blueheading{Project Outcome / Deliverables (1 pts)}
+
+\vspace{1mm}
+
+\answerbox[5cm]{The project will deliver a working C application implementing the full MediSense AI pipeline: symptom-hash based disease matching, a hand-built k-NN engine for historical case comparison, priority-based emergency triage alongside FIFO routine booking, and file-backed persistence for patients, doctors, and case history. It will expose three functioning role-based logins -- Doctor, Patient, and Receptionist -- each scoped to the actions relevant to that role. Alongside the source code, we will deliver this written proposal/report, a system architecture diagram, a worked end-to-end example demonstrating the prediction pipeline on sample data, a mapping table showing exactly where each Data Structures and OOP syllabus topic is used in the codebase, and a final presentation and live demo. a short project readme documenting how to build and run the system, along with sample datasets used for testing the k-NN engine, will also be included}
+
+\vspace{12mm}
+\blueheading{Assumptions}
+
+\vspace{6mm}
+
+
+\answerbox[3.5cm]{We assume the symptoms and vitals entered at intake are reasonably accurate and complete, since the prediction quality depends directly on input quality. we assume a starting historical dataset of roughly 40 confirmed cases for development and testing, growing over time as new diagnoses are logged, and that k = 5 nearest neighbours is a reasonable default for a dataset of this size. we assume single-machine, file-based storage is sufficient for this academic prototype rather than a networked database, and that the system is a decision-support aid for staff -- not a replacement for a doctor's judgement or professional medical advice.}
+
+\vspace{12mm}
+
+\blueheading{References}
+
+\vspace{1mm}
+
+\answerbox[5.5cm]{\small
+\begin{enumerate}[itemsep=1pt,topsep=2pt,leftmargin=16pt]
+\item Course lecture notes and lab material -- Data Structures (C) and Object-Oriented Programming (C++).
+\item A. A. et al. (2025). ``A dynamic model using k-NN algorithm for predicting diabetes and breast cancer.'' Computers in Biology and Medicine, 192, 110276. DOI: 10.1016/j.compbiomed.2025.110276.
+\item J. M. Ruiz Mejia and D. B. Rawat, ``Exploring the Advancements of AI Enabled Clinical Decision Support Systems for Patient Triage in Healthcare,'' in Proc. IEEE Int. Conf. E-Health Networking, Application \& Services (HealthCom), Japan, 2024, pp. 1--4, doi: 10.1109/HealthCom60970.2024.10880833
+\item T. Thangalakshmi, N. Mohankumar, L. N. Jayanthi, Y. M. Blessy, R. Meenakshi, and M. Rajmohan, ``Telemedicine Platforms with Cloud-Based AI-Driven Diagnostics in Hospitals,'' in Proc. 2025 International Conference on Visual Analytics and Data Visualization (ICVADV), India, 2025, pp. 137--143, doi: 10.1109/ICVADV63329.2025.10961133
+\item Course syllabus documents used to build the topic-mapping table in Section 3 of the content reference.
+\end{enumerate}}
+
+\end{document}
