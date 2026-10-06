@@ -1,8 +1,14 @@
 #include "../../src/history/history.h"
 
 #include <assert.h>
+#include <ctype.h>
+#include <errno.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
+#define INPUT_CAPACITY 256
 
 static HistoryVisit make_visit(const char *visit_id,
                                const char *date,
@@ -36,6 +42,155 @@ static size_t read_stream(FILE *stream, char *buffer, size_t capacity)
     assert(!ferror(stream));
     buffer[bytes_read] = '\0';
     return bytes_read;
+}
+
+static int read_nonempty_line(const char *prompt, char *buffer, size_t capacity)
+{
+    for (;;) {
+        size_t length;
+        int character;
+
+        printf("%s", prompt);
+        if (fgets(buffer, (int)capacity, stdin) == NULL) {
+            return 0;
+        }
+
+        length = strlen(buffer);
+        if (length > 0 && buffer[length - 1] == '\n') {
+            buffer[length - 1] = '\0';
+        } else if (!feof(stdin)) {
+            while ((character = getchar()) != '\n' && character != EOF) {
+                /* Discard the remainder of an overlong input line. */
+            }
+            puts("Input is too long; please try again.");
+            continue;
+        }
+
+        if (buffer[0] == '\0') {
+            puts("This value cannot be empty; please try again.");
+            continue;
+        }
+
+        return 1;
+    }
+}
+
+static int read_visit_count(size_t *out_count)
+{
+    char input[INPUT_CAPACITY];
+    char *end;
+    unsigned long long parsed_count;
+
+    for (;;) {
+        printf("Number of visits (0 or more): ");
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            return 0;
+        }
+
+        if (strchr(input, '\n') == NULL && !feof(stdin)) {
+            int character;
+
+            while ((character = getchar()) != '\n' && character != EOF) {
+                /* Discard the remainder of an overlong input line. */
+            }
+            puts("Input is too long; please enter a visit count.");
+            continue;
+        }
+
+        end = input;
+        while (isspace((unsigned char)*end)) {
+            end++;
+        }
+        if (*end == '-') {
+            puts("Please enter a valid non-negative whole number.");
+            continue;
+        }
+
+        errno = 0;
+        parsed_count = strtoull(input, &end, 10);
+        while (*end == ' ' || *end == '\t' || *end == '\n' || *end == '\r') {
+            end++;
+        }
+
+        if (input == end || *end != '\0' || errno == ERANGE
+            || parsed_count > SIZE_MAX) {
+            puts("Please enter a valid non-negative whole number.");
+            continue;
+        }
+
+        *out_count = (size_t)parsed_count;
+        return 1;
+    }
+}
+
+static int run_interactive_history(void)
+{
+    char patient_id[INPUT_CAPACITY];
+    History *history = NULL;
+    HistoryStatus status;
+    size_t visit_count;
+    size_t index;
+
+    puts("Patient visit history");
+    if (!read_nonempty_line("Patient ID: ", patient_id, sizeof(patient_id))
+        || !read_visit_count(&visit_count)) {
+        fputs("\nInput ended before history entry was complete.\n", stderr);
+        return 1;
+    }
+
+    status = history_create(patient_id, &history);
+    if (status != HISTORY_STATUS_OK) {
+        fprintf(stderr, "Could not create history (status %d).\n", status);
+        return 1;
+    }
+
+    for (index = 0; index < visit_count; index++) {
+        char visit_id[INPUT_CAPACITY];
+        char date[INPUT_CAPACITY];
+        char symptoms[INPUT_CAPACITY];
+        char diagnosis[INPUT_CAPACITY];
+        char result_or_recommendation[INPUT_CAPACITY];
+        char doctor[INPUT_CAPACITY];
+        HistoryVisit visit;
+
+        printf("\nVisit %zu of %zu\n", index + 1, visit_count);
+        if (!read_nonempty_line("Visit ID: ", visit_id, sizeof(visit_id))
+            || !read_nonempty_line("Date: ", date, sizeof(date))
+            || !read_nonempty_line("Symptoms: ", symptoms, sizeof(symptoms))
+            || !read_nonempty_line("Diagnosis: ", diagnosis, sizeof(diagnosis))
+            || !read_nonempty_line("Result/recommendation: ",
+                                   result_or_recommendation,
+                                   sizeof(result_or_recommendation))
+            || !read_nonempty_line("Doctor: ", doctor, sizeof(doctor))) {
+            fputs("\nInput ended before the visit was complete.\n", stderr);
+            history_destroy(history);
+            return 1;
+        }
+
+        visit = make_visit(visit_id,
+                           date,
+                           symptoms,
+                           diagnosis,
+                           result_or_recommendation,
+                           doctor);
+        status = history_add_visit(history, &visit);
+        if (status != HISTORY_STATUS_OK) {
+            fprintf(stderr, "Could not add visit (status %d).\n", status);
+            history_destroy(history);
+            return 1;
+        }
+    }
+
+    puts("\nStored visit history:");
+    status = history_display(history, stdout);
+    history_destroy(history);
+
+    if (status != HISTORY_STATUS_OK) {
+        fprintf(stderr, "Could not display history (status %d).\n", status);
+        return 1;
+    }
+
+    return 0;
 }
 
 static void test_create_and_empty_history(void)
@@ -133,6 +288,9 @@ static void test_multiple_visits_are_displayed_in_order(void)
     assert(strstr(output, "Patient ID: patient-1") != NULL);
     assert(strstr(output, "Symptoms: headache") != NULL);
 
+    puts("Sample history output:");
+    assert(history_display(history, stdout) == HISTORY_STATUS_OK);
+
     fclose(stream);
     history_destroy(history);
 }
@@ -206,13 +364,23 @@ static void test_invalid_arguments_and_cleanup(void)
     history_destroy(history);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
+    if (argc == 2 && strcmp(argv[1], "--interactive") == 0) {
+        return run_interactive_history();
+    }
+
+    if (argc != 1) {
+        fprintf(stderr, "Usage: %s [--interactive]\n", argv[0]);
+        return 2;
+    }
+
     test_create_and_empty_history();
     test_add_one_visit_and_copy_input();
     test_multiple_visits_are_displayed_in_order();
     test_missing_and_duplicate_visit_ids();
     test_histories_are_isolated_by_patient();
     test_invalid_arguments_and_cleanup();
+    puts("All history tests passed.");
     return 0;
 }
