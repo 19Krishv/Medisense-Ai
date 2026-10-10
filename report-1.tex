@@ -1,0 +1,543 @@
+\documentclass[12pt,a4paper]{article}
+
+% ============================================================
+% PACKAGES
+% ============================================================
+\usepackage[
+    a4paper,
+    top=1.55cm,
+    bottom=1.35cm,
+    left=1.75cm,
+    right=1.75cm
+]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{ragged2e}
+
+% ============================================================
+% COLORS
+% ============================================================
+\definecolor{GEUBlue}{RGB}{43,91,145}
+\definecolor{GEUBannerBlue}{RGB}{0,102,148}
+\definecolor{GEUYellow}{RGB}{255,201,38}
+\definecolor{InstructionGrey}{RGB}{125,125,125}
+
+% ============================================================
+% GENERAL SETTINGS
+% ============================================================
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\arraystretch}{1}
+
+% ============================================================
+% HEADER / FOOTER
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{%
+    \fontsize{10.5}{12}\selectfont
+    BTech: (DSCPP-III-2026-T211)
+}
+
+\fancyhead[R]{%
+    \fontsize{10.5}{12}\selectfont
+    PHASE-II PROJECT PROGRESS
+}
+
+\fancyfoot[R]{%
+    \fontsize{10}{12}\selectfont
+    Page \thepage
+}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\setlength{\headheight}{20pt}
+\setlength{\headsep}{0.65cm}
+\setlength{\footskip}{0.65cm}
+
+% ============================================================
+% BOTTOM YELLOW LINE
+% ============================================================
+\AddToShipoutPictureBG{%
+\begin{tikzpicture}[remember picture,overlay]
+    \fill[GEUYellow]
+    (current page.south west)
+    rectangle
+    ([yshift=0.14cm]current page.south east);
+\end{tikzpicture}
+}
+
+% ============================================================
+% CUSTOM COMMANDS
+% ============================================================
+\newcommand{\sectiontitle}[1]{%
+    {\color{GEUBlue}
+    \fontsize{18}{22}\selectfont #1}
+}
+
+\newcommand{\instruction}[1]{%
+    {\color{InstructionGrey}
+    \fontsize{10.5}{13}\selectfont #1}
+}
+
+\newcommand{\answerbox}[2]{%
+    \begin{tabularx}{\textwidth}{
+        |>{\raggedright\arraybackslash}X|}
+        \hline
+        \parbox[t][#1][t]{\dimexpr\linewidth-12pt\relax}{
+            \vspace{5pt}
+            \fontsize{11}{13}\selectfont #2
+        }\\
+        \hline
+    \end{tabularx}
+}
+
+% ============================================================
+% DOCUMENT
+% ============================================================
+\begin{document}
+
+% ============================================================
+% PAGE 1
+% ============================================================
+
+\vspace*{0.10cm}
+
+% Upload Graphic Era logo as graphicera_logo.png
+\includegraphics[width=8.0cm]{geulogo.png}
+
+\vspace{0.70cm}
+
+\noindent
+\colorbox{GEUBannerBlue}{%
+\parbox{\dimexpr\textwidth-2\fboxsep\relax}{
+    \vspace{0.17cm}
+    {\color{GEUYellow}
+    \fontsize{16.5}{20}\selectfont
+    \bfseries
+    PROJECT AND TEAM INFORMATION}
+    \vspace{0.17cm}
+}}
+
+\vspace{0.80cm}
+
+% PROJECT TITLE
+\sectiontitle{Project Title}
+
+\vspace{0.05cm}
+
+\vspace{0.40cm}
+
+\answerbox{1.00cm}{MediSense AI – A Hybrid, Self-Built k-NN Based Clinical Decision Support and Triage System}
+
+\vspace{0.80cm}
+
+% STUDENT INFORMATION
+% \sectiontitle{Student/Team Information}
+
+% \vspace{0.40cm}
+
+% \begin{tabularx}{\textwidth}{
+% |>{\raggedright\arraybackslash}p{0.66\textwidth}
+% |>{\raggedright\arraybackslash}X|
+% }
+% \hline
+
+% \parbox[t][1.15cm][t]{\linewidth}{
+% \vspace{4pt}
+% \fontsize{10.5}{13}\selectfont
+% Team Name:\\[2pt]
+% Team \# (Mentor needs to assign)
+% }
+% &
+% \\
+% \hline
+
+% \parbox[t][3.65cm][t]{\linewidth}{
+% \vspace{5pt}
+% \fontsize{10.5}{13}\selectfont
+% Team member 1 (Team Lead)\\[3pt]
+% {\color{InstructionGrey}
+% (Last Name, name: student ID: email, picture):}
+% }
+% &
+% \\
+% \hline
+
+% \parbox[t][3.65cm][t]{\linewidth}{
+% \vspace{5pt}
+% \fontsize{10.5}{13}\selectfont
+% Team member 2\\[3pt]
+% {\color{InstructionGrey}
+% (Last Name, name: student ID: email, picture):}
+% }
+% &
+% \\
+% \hline
+
+% \end{tabularx}
+
+% \newpage
+\noindent
+\begin{tabularx}{\textwidth}{|>{\RaggedRight\arraybackslash}p{0.69\textwidth}|>{\RaggedRight\arraybackslash}X|}
+\hline
+\begin{minipage}[t]{\linewidth}
+\vspace{1.5mm}
+\textit{Team Name:}\\[-1mm]
+\textit{Team \#}
+\vspace{1.5mm}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}
+\vspace{1.5mm}
+\textit{Codeblue}
+\vspace{1.5mm}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 1 (Team Lead)}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Verma, Krish -
+2510370349}\\
+\textit{2510370349@geu.ac.in}
+
+\vspace{1mm}
+\includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{krish.png}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 2}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Kumar Kanu, shivam - 
+2510018717}\\
+\textit{2510018717@geu.ac.in}
+
+\vspace{1mm}
+\includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{shivam.png}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 3}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Garg, Suhani - 
+2510350042}\\
+\textit{2510350042@geu.ac.in}
+
+\vspace{1mm}
+\includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{suhani.png}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 4}\\[-1mm]
+\textit{(Last Name, name: student ID: email, picture):}
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][3.25cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Sumit – 2510370550}\\
+\textit{2510370550@geu.ac.in}
+
+\vspace{2mm}
+ \includegraphics[width=3.0cm,height=1.5cm,keepaspectratio]{sumit.png}
+\end{minipage}
+\\
+\hline
+\end{tabularx}
+
+\newpage
+% ============================================================
+% PAGE 2
+% ============================================================
+
+\vspace*{0.15cm}
+
+\noindent
+\colorbox{GEUBannerBlue}{%
+\parbox{\dimexpr\textwidth-2\fboxsep\relax}{
+    \vspace{0.18cm}
+    {\color{GEUYellow}
+    \fontsize{17}{21}\selectfont
+    \bfseries
+    PHASE-II PROJECT PROGRESS DESCRIPTION }
+    \vspace{0.18cm}
+}}
+
+\vspace{0.70cm}
+
+% PROJECT ABSTRACT
+\sectiontitle{Project Abstract }
+
+\vspace{0.05cm}
+
+\vspace{0.12cm}
+
+\answerbox{6.00cm}{MediSense AI is our C-based project that looks at how data structures and algorithms can be used in a patient intake and triage system. The user types in symptoms and vital signs. The program handles these inputs in two steps. First our nearest-neighbours (k-NN) part compares scaled values for heart rate, systolic and diastolic blood pressure, oxygen saturation and glucose with synthetic patient cases. Second another part checks the symptoms against a disease-symptom table.\\
+The results help show a case category and suggest a specialty from the doctor list. For appointments we use a queue for routine cases and a priority queue for urgent demonstration cases. Patient, doctor, appointment and case details are meant to be stored in files.
+As we work on the project we’re using structures, pointers, dynamic memory arrays, hashing, sorting, queues, linked lists and file handling. The code is built in a way with functions that have clear interfaces. Since the data is fake the project is for coursework and demonstration. It does not give a diagnosis or treatment advice. It should never be used of a review, by a qualified healthcare professional.}
+
+\vspace{0.70cm}
+
+% UPDATED PROJECT APPROACH
+\sectiontitle{Updated Project Approach and Architecture }
+
+\vspace{1mm}
+
+\begin{center}
+\begin{tikzpicture}[
+  yscale=1, xscale=1,
+  box/.style={draw, rounded corners, align=center, minimum height=1.0cm, font=\small, fill=blue!5},
+  role/.style={box, minimum width=2.6cm, fill=TitleBlue!12},
+  core/.style={box, minimum width=3.0cm, minimum height=1.3cm},
+  store/.style={box, minimum width=2.6cm, fill=gray!12},
+  arrow/.style={-Stealth, thick}
+]
+
+\node[role] (doctor) at (-4.2,0) {Doctor\\Login};
+\node[role] (receptionist) at (0,0) {Receptionist\\Login};
+\node[role] (patient) at (4.2,0) {Patient\\Login};
+
+\node[box, minimum width=9.6cm] (interface) at (0,-1.7) {Command-Line Interface Layer};
+
+\node[core] (hash) at (-3.4,-3.4) {Symptom Hashing\\(Hash Table +\\Sparse Matrix)};
+\node[core] (knn) at (0,-3.4) {custom k-NN\\engine\\(Quick Sort)};
+\node[core] (triage) at (3.4,-3.4) {Triage queues\\(priority + FIFO)};
+\node[store] (patientfile) at (-3.4,-5.1) {Patient /\\Doctor Records};
+\node[store] (casefile) at (0,-5.1) {k-NN Case\\history};
+\node[store] (visitfile) at (3.4,-5.1) {Visit History\\(Linked List)};
+\node[box, minimum width=9.6cm] (storage) at (0,-6.4) {File-Based Persistent Storage};
+
+\draw[arrow] (doctor) -- (interface);
+\draw[arrow] (receptionist) -- (interface);
+\draw[arrow] (patient) -- (interface);
+\draw[arrow] (interface) -- (hash);
+\draw[arrow] (interface) -- (knn);
+\draw[arrow] (interface) -- (triage);
+\draw[arrow] (hash) -- (patientfile);
+\draw[arrow] (knn) -- (casefile);
+\draw[arrow] (triage) -- (visitfile);
+\draw[arrow] (patientfile) -- (storage);
+\draw[arrow] (casefile) -- (storage);
+\draw[arrow] (visitfile) -- (storage);
+\end{tikzpicture}
+\end{center}
+
+\vspace{2mm}
+
+\vspace{0.25cm}
+
+\answerbox{5.0cm}{The workflow begins when patient details, symptoms and vital signs are entered and reviewed. The k-NN module then looks at the signs and compares them with sample cases. The symptom module checks the symptoms against its lookup table. Both results are kept apart before the program shows a case category and a possible specialty. Queue handling and saving records to files are part of the planned steps.\\
+The features used by k-NN are heart rate, systolic blood pressure, diastolic blood pressure, oxygen saturation and glucose. These measurements have ranges so they need to be scaled using values from the training data.
+We are creating the application, in C. Plan to use our own data structures, standard libraries and CSV or text files. We have not decided to use a machine-learning library. The module interfaces still need to be worked out during the integration process.}
+
+\newpage
+
+% ============================================================
+% PAGE 3
+% ============================================================
+
+\vspace*{0.20cm}
+
+% TASKS COMPLETED
+\sectiontitle{Tasks Completed }
+
+\vspace{0.05cm}
+
+\vspace{0.20cm}
+
+\begin{tabularx}{\textwidth}{
+|>{\raggedright\arraybackslash}X
+|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Task Completed} & \textbf{Team Member}\\
+\hline
+Worked on combining the k-NN vital-sign result with symptom matching so the program can show a case category and suggest a relevant specialist.
+& Krish Verma\\
+\hline
+Added role-based login options for doctors, patients, and receptionists, along with input for registering a new patient.
+& Shivam Kumar Kanu\\
+\hline
+Organized the patient and doctor datasets and worked on updating records when new-patient details are entered.
+& Sumit\\
+\hline
+Added appointment booking to the Patient and Receptionist sections and checked the related input and booking steps, along with report viewing.
+& Suhani Garg\\
+\hline
+\end{tabularx}
+
+\vspace{0.65cm}
+
+% CHALLENGES
+\sectiontitle{Challenges/Roadblocks}
+
+\vspace{0.05cm}
+\vspace{0.18cm}
+
+\answerbox{6.5cm}{One limitation we must remember is the data itself. Our patient cases are made up. They help us test the programs logic. They cannot show how the program would work with real medical records. We treat MediSense AI as a learning project not as a tool for making decisions. Any real case would need assessment by a health professional.
+A second issue is that vital signs do not share the units or numerical range. Before comparing cases we need to scale the values according to the training dataset and use the same settings for new entries.\\
+We also have two ways to analyse an entry. K-NN looks for cases with similar vital signs; symptom matching checks the entered symptoms against the disease-symptom table. Showing the two outputs separately will make it easier to understand what each method returned. We will combine them only if their categories can be compared meaningfully.
+Integration is another task to watch: modules may use field names, data formats or function arguments. Our plan is to agree on shared structures check user input and test the modules individually before joining them. Once the integrated program is ready we still need to record tests, for urgent-demo, incomplete and invalid inputs.}
+
+\vspace{0.65cm}
+
+% TASKS PENDING
+\sectiontitle{Tasks Pending }
+
+\vspace{0.05cm}
+\vspace{0.18cm}
+
+\begin{tabularx}{\textwidth}{
+|>{\raggedright\arraybackslash}X
+|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Task Pending} & \textbf{Team Member (to complete the task)}\\
+\hline
+Implement emergency-case handling and doctor scheduling.
+& Suhani Garg\\
+\hline
+Enable patients to view their reports and doctors to update patient reports.
+& Sumit\\
+\hline
+Develop and integrate the user interface for Doctor, Patient, and Receptionist features.
+& Shivam Kumar kanu and Krish Verma\\
+\hline
+\end{tabularx}
+
+\newpage
+
+% ============================================================
+% PAGE 4
+% ============================================================
+
+\vspace*{0.30cm}
+
+% PROJECT OUTCOME
+\sectiontitle{Project Outcome/Deliverables }
+
+\vspace{0.05cm}
+
+\vspace{0.35cm}
+
+\answerbox{5.50cm}{Our goal is to finish MediSense AI as a menu-driven C program that brings together the data structures covered in our coursework. A user will be able to enter symptoms and vital signs; the k-NN module will compare the vital signs with synthetic sample cases, and the symptom module will check the reported symptoms against its table. The program is intended to show a case category and use it to suggest a suitable specialty from the doctor list.\\
+Other planned parts are regular and priority queues for appointment handling, file-based patient, doctor, and case records, and input checks. Building these parts gives us a chance to apply structures, pointers, dynamic memory allocation, arrays, hashing, sorting, queues, linked lists, and file handling in one project.\\
+We plan to submit the C source code, synthetic patient and doctor datasets, test cases with their results, the project report, and a presentation of the workflow. The program is for learning only; it cannot provide a medical diagnosis or treatment advice.}
+
+\vspace{0.75cm}
+
+% PROGRESS OVERVIEW
+\sectiontitle{Progress Overview }
+
+\vspace{0.05cm}
+
+
+\vspace{0.25cm}
+
+\answerbox{5.50cm}{We have defined the purpose of MediSense AI, the people who will use MediSense AI and how the different parts of MediSense AI are expected to work together. The design of MediSense AI includes patient‑data entry k‑NN analysis of signs, symptom matching, specialty suggestions, queue management and file storage. We have linked these planned features of MediSense AI to topics from our Data Structures and OOP courses.
+We have also prepared one hundred patient cases and a list of doctors with relevant specialties for MediSense AI. The Phase‑I presentation says that work on k‑NN analysis and symptom matching has started, but it does not confirm that both modules of MediSense AI are complete or connected.\\
+The complete C application, file handling, triage flow and systematic algorithm testing for MediSense AI still need work. Our next steps for MediSense AI are to settle a data format integrate the modules of MediSense AI check valid and invalid inputs and record the test results, for MediSense AI. We will also keep the repository address, branch and important commit details of MediSense AI in the report.}
+
+\newpage
+
+% ============================================================
+% PAGE 5
+% ============================================================
+
+\vspace*{0.20cm}
+
+% CODEBASE
+\sectiontitle{Codebase Information }
+
+\vspace{0.05cm}
+
+
+\vspace{0.20cm}
+
+\answerbox{4.00cm}{
+Language: C. Current features include patient-data entry, role-based login,
+k-NN and symptom-based results, specialty suggestions, and appointment
+booking.\\
+Repository: https://github.com/19Krishv/Medisense-Ai\\
+Branch: main\\
+Current history: 14 commits. Visible commits include
+\texttt{a1cfba2} -- Test History,
+\texttt{history.h module}, 
+\texttt{Symptom Hash},
+project report updates; k-NN prediction code;
+Doctor, Patient, and Receptionist login portals; new-patient detail
+input; and updating patient records.}
+\vspace{0.65cm}
+
+% TESTING
+\sectiontitle{Testing and Validation Status }
+
+\vspace{0.05cm}
+
+
+\vspace{0.30cm}
+
+\begin{tabularx}{\textwidth}{
+|>{\raggedright\arraybackslash}p{0.34\textwidth}
+|>{\raggedright\arraybackslash}p{0.25\textwidth}
+|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Type} & \textbf{Status (Pass/Fail)} & \textbf{Notes}\\
+\hline
+Patient input and role access & Checked & Workflow checked by Suhani.\\
+\hline
+Appointment booking & Checked & Patient and Receptionist booking workflow checked by Suhani.\\
+\hline
+Prediction and specialist suggestion & Checked & Test k-NN and symptom-based results using sample cases.\\
+\hline
+Patient reports, doctor updates and emergency cases priority & Pending & Sumit is completing report viewing and doctor update features.\\
+\hline
+\end{tabularx}
+
+\vspace{0.65cm}
+
+% DELIVERABLES PROGRESS
+\sectiontitle{Deliverables Progress}
+
+\vspace{0.05cm}
+
+\vspace{0.25cm}
+
+\answerbox{3.20cm}{{Completed:} Role-based access, new-patient input, k-NN and
+symptom-based prediction with specialist suggestions, and appointment
+booking through Patient and Receptionist sections.\\[2pt]
+{In progress:} Emergency-case handling and doctor scheduling.\\[2pt]
+{Pending:} Patient report viewing and doctor updates to patient reports.}
+
+\end{document}
