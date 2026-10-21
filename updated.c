@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #define CSV_FILE "Book1.csv"
 static void read_value(const char *prompt, char *value, size_t size)
